@@ -18,6 +18,22 @@ Fonts:
 
 */
 
+/* Optional: pick up locally-installed Proxima Nova if available */
+@font-face {
+    font-family: 'Proxima Nova';
+    src: local('Proxima Nova'), local('ProximaNova-Regular'), local('Proxima Nova Regular');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    src: local('Proxima Nova Bold'), local('ProximaNova-Bold');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -31,10 +47,17 @@ body {
     align-items: center;
     min-height: 100dvh; /* dynamic viewport for mobile browsers */
     background-color: #e6f7ff;
-    font-family: Arial, sans-serif;
+    font-family: 'Proxima Nova', 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     width: 100%;
     overflow-x: hidden;
     padding-bottom: max(72px, env(safe-area-inset-bottom)); /* reserve space for footer */
+    /* subtle dotted background pattern in brand blue */
+    background-image:
+        radial-gradient(circle at 25px 25px, rgba(46,157,247,0.08) 2px, transparent 2px),
+        radial-gradient(circle at 75px 75px, rgba(46,157,247,0.06) 2px, transparent 2px);
+    background-size: 100px 100px;
 }
 
 .layout-row {
@@ -45,6 +68,29 @@ body {
     width: 100%;
     min-height: auto;
 }
+
+/* Header branding */
+.brand-header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #8BD1CB;
+    position: relative;
+    z-index: 2;
+}
+.brand-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.brand-logo {
+    height: 36px;
+    width: auto;
+}
+.brand-right .btn + .btn { margin-left: 8px; }
 
 .side-text {
     display: flex;
@@ -61,10 +107,10 @@ body {
 }
 
 .left-text {
-    border-right: 1px solid #8BD1CB;
+    border-right: 2px solid #8BD1CB;
 }
 .right-text {
-    border-left: 1px solid #8BD1CB;
+    border-left: 2px solid #8BD1CB;
 }
 
 .game-link {
@@ -73,8 +119,42 @@ body {
     text-align: center;
     color: #2E9DF7;
     font-size: 1.1rem;
-    text-decoration: underline;
+    text-decoration: none;
 }
+
+/* Button styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.06s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary {
+    background-color: #FFC907; /* brand yellow */
+    color: #131313;
+    border: 1px solid #E5B800;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+}
+.btn-primary:hover { background-color: #EABA06; }
+.btn-secondary {
+    background: #ffffff;
+    color: #2E9DF7;
+    border: 1px solid #2E9DF7;
+}
+.btn-secondary:hover { background: #E6F2FF; }
+.btn-link {
+    background: transparent;
+    color: #2E9DF7;
+    border: none;
+}
+.btn-link:hover { text-decoration: underline; }
 
 
 .game-wrapper {
@@ -100,6 +180,42 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+#milestone-banner {
+    width: 90vw;
+    max-width: 800px;
+    min-height: 0;
+    margin: 8px auto 0 auto;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #FFC907; /* brand yellow */
+    color: #131313;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+#milestone-banner.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.difficulty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.difficulty-control select {
+    padding: 6px 10px;
+    border: 1px solid #8BD1CB;
+    border-radius: 6px;
+    background: #f9fdff;
+}
+
 .timer {
     flex: 0 1 auto;
     font-size: 24px;
@@ -120,20 +236,23 @@ body {
     touch-action: manipulation;
 }
 
-
-#start-btn {
-    padding: 12px 24px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-    touch-action: manipulation;
+/* Water can watermark in game area */
+#game-container::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+    width: min(28vw, 180px);
+    height: min(28vw, 180px);
+    background: url('img/water-can-transparent.png') no-repeat center / contain;
+    opacity: 0.08;
+    pointer-events: none;
 }
 
-#start-btn:hover {
-    background-color: #45a049;
+
+#start-btn {
+    font-size: 18px;
+    touch-action: manipulation;
 }
 
 .score {
@@ -266,6 +385,10 @@ body {
         max-width: 100%;
         min-width: 180px;
         font-size: clamp(14px, 4vw, 18px);
+    }
+    .difficulty-control {
+        justify-content: space-between;
+        margin-bottom: 8px;
     }
     #game-container {
         aspect-ratio: 2 / 3;

@@ -7,24 +7,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="site-header brand-header" role="banner">
+        <div class="brand-inner">
+            <div class="brand-left">
+                <img src="img/cw_logo-horizontal.png" alt="charity: water" class="brand-logo" />
+            </div>
+            <nav class="brand-right" aria-label="Primary">
+                <a href="https://www.charitywater.org/" target="_blank" rel="noopener" class="btn btn-link">Learn More</a>
+                <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener" class="btn btn-primary">Donate</a>
+            </nav>
+        </div>
+    </header>
     <div class="layout-row">
         <div class="side-text left-text">Since charity: water was founded in 2006, we’ve been chasing one ambitious goal: ending the global water crisis. And while the water crisis is huge, we’re optimistic. We know how to solve the problem, and we make progress every day thanks to the help of local partners and generous supporters. If we work together, we believe everyone will have access to life’s most basic need within our lifetime.</div>
         <div class="game-wrapper">
             <h1 class="game-title">Water Drop</h1>
             <p class="game-tagline">Catch the good drops, avoid the bad ones!</p>
-            <a href="#" class="game-link">https://www.charitywater.org/</a>
+            <a href="https://www.charitywater.org/" target="_blank" rel="noopener" class="game-link btn btn-secondary">Learn more at charity: water</a>
             <div class="score-panel">
+                <div class="difficulty-control">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty" aria-label="Select difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
                 <div class="score">Score: <span id="score">0</span></div>
                 <div class="timer">Time: <span id="time">30</span>s</div>
-                <button id="start-btn">Start Game</button>
+                <button id="start-btn" class="btn btn-primary">Start Game</button>
             </div>
+            <div id="milestone-banner" aria-live="polite" aria-atomic="true"></div>
             <div id="game-container">
             </div>
         </div>
         <div class="side-text right-text">When charity: water began, we made a bold promise: 100% of public donations would go directly to fund clean water projects. Private donors cover our operating costs so 100% of your money can fund water projects.</div>
     </div>
     <footer class="site-footer">
-        <div class="footer-content">Github @BurakErenT</div>
+        <div class="footer-content">https://www.charitywater.org/</div>
     </footer>
     <script src="script.js"></script>
 </body>
